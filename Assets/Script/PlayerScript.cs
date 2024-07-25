@@ -72,6 +72,15 @@ public class PlayerScript : MonoBehaviour
            
         }
 
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            audioSource.PlayOneShot(damageSound, 0.5f);
+            GameObject DamageEffect = Instantiate(prefabDamageEffect, collision.transform.position, Quaternion.identity);
+            Destroy(DamageEffect, 0.07f);
+            damagePlayerHealthBar();
+            Destroy(collision.gameObject);
+        }
+
         if (collision.gameObject.CompareTag("Coin"))
         {
             AudioSource.PlayClipAtPoint(coinCollection, transform.position, 0.5f); 

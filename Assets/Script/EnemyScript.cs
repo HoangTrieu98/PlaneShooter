@@ -57,6 +57,14 @@ public class EnemyScript : MonoBehaviour
             }
            
         }
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            AudioSource.PlayClipAtPoint(explosionSound, transform.position, 0.5f);
+            Destroy(gameObject);
+            GameObject enemyExplosion = Instantiate(enemyExplosionPrefab, transform.position, Quaternion.identity);
+            Destroy(enemyExplosion, 0.4f);
+            Instantiate(coinPrefab, transform.position, Quaternion.identity);
+        }
     }
 
     void DamageHealthbar()
