@@ -79,6 +79,14 @@ public class PlayerScript : MonoBehaviour
             Destroy(DamageEffect, 0.07f);
             damagePlayerHealthBar();
             Destroy(collision.gameObject);
+            if (Health <= 0)
+            {
+                gameController.GameOVer();
+                Destroy(gameObject);
+                GameObject playerExplosion = Instantiate(explosion, transform.position, Quaternion.identity);
+                AudioSource.PlayClipAtPoint(damageSound, Camera.main.transform.position, 0.5f);
+                Destroy(playerExplosion, 2f);
+            }
         }
 
         if (collision.gameObject.CompareTag("Coin"))
@@ -98,4 +106,5 @@ public class PlayerScript : MonoBehaviour
             playerHealthBar.SetAmount(barFillAmount);
         }
     }
+
 }

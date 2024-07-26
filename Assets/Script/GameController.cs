@@ -41,8 +41,10 @@ public class GameController : MonoBehaviour
 
     public void GameOVer()
     {
+        
         gameOverMenu.SetActive(true);
         pauseButton.SetActive(false);
+        Time.timeScale = 0f;
     }
 
     public void QuitGame()
