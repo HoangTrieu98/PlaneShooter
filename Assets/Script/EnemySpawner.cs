@@ -6,12 +6,31 @@ public class Spawner : MonoBehaviour
 {
     public GameObject[] enemy;
     public float respawnTime = 3.0f;
-    public int enemySpawnCount = 10;
+    public int enemySpawnCount = 5;
     public GameController gameController;
     public bool lastEnemySpawn = false;
     // Start is called before the first frame update
     void Start()
     {
+        if (PlayerPrefs.HasKey("WaveCount"))
+        {
+            int waveCurrent = PlayerStorage.instance.waveCount;
+
+            if (waveCurrent <= 0)
+            {
+                enemySpawnCount = 5;
+            }
+
+            if (waveCurrent == 1)
+            {
+                enemySpawnCount = 10;
+            }
+
+            if (waveCurrent == 2)
+            {
+                enemySpawnCount = 15;
+            }
+        }
         StartCoroutine(EnemySpawner());
     }
 

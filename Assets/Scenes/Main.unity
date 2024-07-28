@@ -1358,9 +1358,9 @@ RectTransform:
   - {fileID: 934231519}
   m_Father: {fileID: 1632306373}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 839.3}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: -34.4}
   m_SizeDelta: {x: 400, y: 41.56189}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &660144959
@@ -1687,6 +1687,7 @@ MonoBehaviour:
   coinCollection: {fileID: 8300000, guid: 8dee376b72f6448a98f932724b984b49, type: 3}
   gameController: {fileID: 857673047}
   Health: 20
+  maxHealth: 20
   playerHealthBar: {fileID: 660144959}
   explosion: {fileID: 1730338621821775202, guid: 5f4e9644323075a4aa1bfb891583bbea, type: 3}
   speed: 10
@@ -1952,7 +1953,7 @@ GameObject:
   - component: {fileID: 842536076}
   - component: {fileID: 842536075}
   m_Layer: 5
-  m_Name: 'Play Again Text '
+  m_Name: Next Mission Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2053,7 +2054,7 @@ MonoBehaviour:
   gameCompletePanel: {fileID: 1951350161}
   waveEndText: {fileID: 1769337987}
   gameOverMenu: {fileID: 699364195}
-  gameStartMenu: {fileID: 0}
+  currentWave: 1
 --- !u!4 &857673048
 Transform:
   m_ObjectHideFlags: 0
@@ -2608,7 +2609,7 @@ GameObject:
   - component: {fileID: 1544781870}
   - component: {fileID: 1544781869}
   m_Layer: 5
-  m_Name: 'Next Button '
+  m_Name: 'Next Mission Button '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2677,7 +2678,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1544781870}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 857673047}
+        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+        m_MethodName: StartNextMission
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1544781870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3419,7 +3432,7 @@ GameObject:
   - component: {fileID: 1802404260}
   m_Layer: 0
   m_Name: EnemySpawner
-  m_TagString: Untagged
+  m_TagString: SpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

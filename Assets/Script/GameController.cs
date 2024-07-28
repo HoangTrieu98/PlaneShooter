@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class GameController : MonoBehaviour
 {
     public GameObject pauseMenu;
@@ -13,7 +14,10 @@ public class GameController : MonoBehaviour
 
     public GameObject gameOverMenu;
 
-    public GameObject gameStartMenu;
+
+    public int currentWave = 1;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -57,17 +61,22 @@ public class GameController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public void StartGame()
-    {
-        SceneManager.LoadScene("Main");
-    }
-
     public IEnumerator GameComplete()
     {
+
         yield return new WaitForSeconds(2f);
         waveEndText.SetActive(true);
         yield return new WaitForSeconds(3f);
         gameCompletePanel.SetActive(true);
         Time.timeScale = 0f;
+        PlayerStorage.instance.waveCount++;
+        PlayerStorage.instance.SaveWave();
+
+    }
+
+    public void StartNextMission()
+    {
+        currentWave++;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

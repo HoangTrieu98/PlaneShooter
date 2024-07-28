@@ -11,9 +11,11 @@ public class PlayerScript : MonoBehaviour
 
     public GameController gameController;
  
-    public float Health = 20f;
+    public int Health = 20;
+    public int maxHealth = 20;
     private float barFillAmount = 1f;
-    private float damage = 0f;
+    
+    
     public PlayerHealthBar playerHealthBar;
 
     public GameObject explosion;
@@ -27,7 +29,15 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         FindBoundaries();
-        damage = barFillAmount / Health;
+        if (PlayerPrefs.HasKey("PlayerHealth"))
+        {
+            Health = PlayerStorage.instance.playerHealth;
+            barFillAmount = Health * 1.0f/ maxHealth;
+            playerHealthBar.SetAmount(barFillAmount);
+        }
+        
+
+
     }
 
     void FindBoundaries()
@@ -68,6 +78,7 @@ public class PlayerScript : MonoBehaviour
                 GameObject playerExplosion = Instantiate(explosion, transform.position, Quaternion.identity);
                 AudioSource.PlayClipAtPoint(damageSound, Camera.main.transform.position, 0.5f);
                 Destroy(playerExplosion, 2f);
+                PlayerPrefs.DeleteAll();
             }
            
         }
@@ -86,6 +97,7 @@ public class PlayerScript : MonoBehaviour
                 GameObject playerExplosion = Instantiate(explosion, transform.position, Quaternion.identity);
                 AudioSource.PlayClipAtPoint(damageSound, Camera.main.transform.position, 0.5f);
                 Destroy(playerExplosion, 2f);
+                PlayerPrefs.DeleteAll();
             }
         }
 
@@ -94,6 +106,7 @@ public class PlayerScript : MonoBehaviour
             AudioSource.PlayClipAtPoint(coinCollection, transform.position, 0.5f); 
             Destroy(collision.gameObject);
             coinCountScript.AddCount();
+            
         }
     }
 
@@ -102,7 +115,9 @@ public class PlayerScript : MonoBehaviour
         if(Health > 0)
         {
             Health -= 1;
-            barFillAmount = barFillAmount - damage;
+            PlayerStorage.instance.playerHealth = Health;
+            PlayerStorage.instance.SaveHealth();
+            barFillAmount = Health * 1.0f / maxHealth;
             playerHealthBar.SetAmount(barFillAmount);
         }
     }

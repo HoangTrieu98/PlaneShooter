@@ -8,6 +8,7 @@ TagManager:
   - Enemy Bullet
   - Player Bullet
   - Coin
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX

@@ -12,7 +12,10 @@ public class CoinCount : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (PlayerPrefs.HasKey("PlayerCoins"))
+        {
+            count = PlayerStorage.instance.playerCoins;
+        }
     }
 
     // Update is called once per frame
@@ -25,5 +28,7 @@ public class CoinCount : MonoBehaviour
     public void AddCount()
     {
         count++;
+        PlayerStorage.instance.playerCoins = count;
+        PlayerStorage.instance.SaveCoins();
     }
 }
