@@ -8,7 +8,7 @@ public class PlayerShoot : MonoBehaviour
     public Transform[] shootPosArray;
 
     public GameObject bulletPrefab;
-    public float delayTime = 0.4f;
+    public float delayTime = 2f;
     public float cooldownTimer = 0f;
 
     public GameObject flash;
@@ -26,7 +26,7 @@ public class PlayerShoot : MonoBehaviour
     private void Update()
     {
         cooldownTimer -= Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.Space) && cooldownTimer <= 0)
+        if (cooldownTimer <= 0)
         {
             playerShoot.Play();
             cooldownTimer = delayTime;
